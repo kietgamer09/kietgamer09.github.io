@@ -1,0 +1,47 @@
+const parentElement = document.getElementById("parentElement");
+const showMessage = document.getElementById("showMessage");
+const changeColor = document.body.style;
+
+const propose = () => {
+  parentElement.style.display = "none";
+  showMessage.style.display = "block";
+  changeColor.background =
+    "linear-gradient(116.82deg, #ff94e7 0%, #27cbff 100%)";
+};
+
+// Animate Text with Anim JS
+var textWrapper = document.querySelector(".ml6 .letters");
+textWrapper.innerHTML = textWrapper.textContent.replace(
+  /\S/g,
+  "<span class='letter'>$&</span>"
+);
+
+anime
+  .timeline({ loop: true })
+  .add({
+    targets: ".ml6 .letter",
+    translateY: ["1.1em", 0],
+    translateZ: 0,
+    duration: 750,
+    delay: (el, i) => 50 * i,
+  })
+  .add({
+    targets: ".ml6",
+    opacity: 0,
+    duration: 1000,
+    easing: "easeOutExpo",
+    delay: 1000,
+  });
+
+// Get the "yes" button element
+const yesButton = document.getElementById("yesButton");
+
+// Add event listener to the "yes" button
+yesButton.addEventListener("click", () => {
+  // Call the propose function
+  propose();
+
+  // Show the "I love you" text
+  const loveText = document.getElementById("loveText");
+  loveText.style.display = "block";
+});
